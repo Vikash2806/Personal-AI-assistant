@@ -1,0 +1,150 @@
+text ,label
+open youtube,open_youtube
+go to youtube,open_youtube
+launch youtube,open_youtube
+start youtube,open_youtube
+play youtube,open_youtube
+access youtube,open_youtube
+youtube open,open_youtube
+youtube go,open_youtube
+run youtube,open_youtube
+youtube start,open_youtube
+open google,open_google
+go to google,open_google
+launch google,open_google
+search google,open_google
+start google,open_google
+access google,open_google
+google open,open_google
+google go,open_google
+run google,open_google
+google start,open_google
+open telegram,open_telegram
+launch telegram,open_telegram
+start telegram,open_telegram
+access telegram,open_telegram
+telegram open,open_telegram
+telegram go,open_telegram
+run telegram,open_telegram
+telegram start,open_telegram
+open chat,open_chat
+go to chat,open_chat
+start chat,open_chat
+launch chat,open_chat
+access chat,open_chat
+chat open,open_chat
+chat go,open_chat
+run chat,open_chat
+chat start,open_chat
+open my website,open_my_website
+go to my website,open_my_website
+launch my website,open_my_website
+open my site,open_my_website
+go to my site,open_my_website
+access my website,open_my_website
+my website open,open_my_website
+my website go,open_my_website
+run my website,open_my_website
+my site start,open_my_website
+open my college website,open_college_website
+go to my college website,open_college_website
+launch my college website,open_college_website
+open college site,open_college_website
+go to college site,open_college_website
+access my college website,open_college_website
+my college website open,open_college_website
+my college website go,open_college_website
+run my college website,open_college_website
+college site start,open_college_website
+delete all,delete_all
+clear all,delete_all
+remove all,delete_all
+erase all,delete_all
+delete everything,delete_all
+clear everything,delete_all
+remove everything,delete_all
+erase everything,delete_all
+go to search,go_to_search
+open search,go_to_search
+activate search,go_to_search
+start search,go_to_search
+search bar open,go_to_search
+search bar go,go_to_search
+go to search bar,go_to_search
+unlock friday,unlock_friday
+start friday,unlock_friday
+activate friday,unlock_friday
+enable friday,unlock_friday
+turn on friday,unlock_friday
+unlock jarvis,unlock_jarvis
+start jarvis,unlock_jarvis
+activate jarvis,unlock_jarvis
+enable jarvis,unlock_jarvis
+turn on jarvis,unlock_jarvis
+increase volume,increase_volume
+raise volume,increase_volume
+turn up volume,increase_volume
+boost volume,increase_volume
+volume up,increase_volume
+volume increase,increase_volume
+decrease volume,decrease_volume
+lower volume,decrease_volume
+turn down volume,decrease_volume
+reduce volume,decrease_volume
+volume down,decrease_volume
+volume decrease,decrease_volume
+increase brightness,increase_brightness
+raise brightness,increase_brightness
+turn up brightness,increase_brightness
+boost brightness,increase_brightness
+brightness up,increase_brightness
+brightness increase,increase_brightness
+decrease brightness,decrease_brightness
+lower brightness,decrease_brightness
+turn down brightness,decrease_brightness
+reduce brightness,decrease_brightness
+brightness down,decrease_brightness
+brightness decrease,decrease_brightness
+set volume to zero,set_volume_zero
+mute volume,set_volume_zero
+silence volume,set_volume_zero
+set volume to mute,set_volume_zero
+volume zero,set_volume_zero
+volume mute,set_volume_zero
+set volume to maximum,set_volume_maximum
+max out volume,set_volume_maximum
+turn volume to max,set_volume_maximum
+full volume,set_volume_maximum
+volume maximum,set_volume_maximum
+volume max,set_volume_maximum
+set brightness to zero,set_brightness_zero
+dim screen,set_brightness_zero
+turn off brightness,set_brightness_zero
+set brightness to minimum,set_brightness_zero
+brightness zero,set_brightness_zero
+brightness minimum,set_brightness_zero
+set brightness to maximum,set_brightness_maximum
+full brightness,set_brightness_maximum
+max out brightness,set_brightness_maximum
+brightest setting,set_brightness_maximum
+brightness maximum,set_brightness_maximum
+brightness max,set_brightness_maximum
+make a google search of,make_google_search
+search for,make_google_search
+google,make_google_search
+find,make_google_search
+look up,make_google_search
+search,make_google_search
+type,type_text
+input,type_text
+enter,type_text
+write,type_text
+what is the time,get_time
+current time,get_time
+time now,get_time
+tell me the time,get_time
+stop,stop
+halt,stop
+cease,stop
+terminate,stop
+end,stop
