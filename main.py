@@ -11,16 +11,23 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import wmi
 import pyautogui
-
+import threading
 
 # Initialize speech engine
 engine = pyttsx3.init()
 engine.setProperty('rate', 150)
 
+# Flag to control camera activation
+camera_active = False
+
 # Functions for TTS and STT
 def say(text):
     engine.say(text)
     engine.runAndWait()
+
+def type_text(text):
+    pyautogui.typewrite(text)
+    pyautogui.press('enter')
 
 def takeCommand():
     r = sr.Recognizer()
@@ -52,10 +59,18 @@ def set_volume(change):
     say(f"Volume set to {int(new_volume * 100)} percent")
 
 def set_volume_level(level):
+    devices = AudioUtilities.GetSpeakers()
+    interface = devices.Activate(
+        IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+    volume = cast(interface, POINTER(IAudioEndpointVolume))
     if level == "zero":
-        set_volume(-1)
+        volume.SetMasterVolumeLevelScalar(0.0, None)
+        say("Volume set to zero percent")
     elif level == "maximum":
-        set_volume(1)
+        volume.SetMasterVolumeLevelScalar(1.0, None)
+        say("Volume set to maximum percent")
+
+
 
 
 def set_brightness(change):
@@ -77,8 +92,6 @@ def google_search(query):
     webbrowser.open(search_url)
     say(f"Here are the search results for {query}")
 
-
-# Function to process camera input and detect gestures
 # Function to process camera input and detect gestures
 def process_camera():
     mp_hands = mp.solutions.hands
@@ -86,7 +99,7 @@ def process_camera():
     hands = mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7)
     cap = cv2.VideoCapture(0)
 
-    while cap.isOpened():
+    while camera_active:
         success, image = cap.read()
         if not success:
             print("Ignoring empty camera frame.")
@@ -126,16 +139,30 @@ def process_camera():
 if __name__ == '__main__':
     say("Hello, I am Jarvis AI")
 
-
     while True:
         query = takeCommand()
 
         if not query:
             continue
 
-        if "open youtube" in query:
+        if "unlock friday" in query:
+            say(" Unlocking Friday in 5 seconds ...")
+            camera_active = True
+            camera_thread = threading.Thread(target=process_camera)
+            camera_thread.start()
+
+        elif "make a google search on" in query:
+            search_query = query.replace("make a google search of ", "")
+            google_search(search_query)
+
+        elif "unlock jarvis" in query:
+            say("Unlocking Jarvis...")
+            camera_active = False
+
+        elif "open youtube" in query:
             say("Opening YouTube, Sir...")
             webbrowser.open("https://youtube.com")
+
 
         elif "open google" in query:
             say("Opening Google, Sir...")
@@ -145,6 +172,8 @@ if __name__ == '__main__':
             say("Opening your website, Sir...")
             webbrowser.open("https://vikash2806.github.io/Portfolio-Website/")
 
+
+
         elif "open brave browser" in query:
             say("Opening Brave browser, Sir...")
             os.startfile(r"C:\Users\VIKASH\AppData\Local\BraveSoftware\Brave-Browser\Application\brave")
@@ -153,10 +182,14 @@ if __name__ == '__main__':
             say("Opening Telegram, Sir...")
             os.startfile(r"C:\Users\VIKASH\AppData\Roaming\Telegram Desktop\Telegram")
 
+        elif "open chat" in query:
+            say("Opening ChatGPT, Sir..")
+            webbrowser.open("https://chat.openai.com/")
+
+
         elif "open my college website" in query:
             say("Opening your college website, Sir...")
             webbrowser.open("https://sastra.edu/")
-
 
         elif "who created you" in query or "who built you" in query:
             say("I am AI assistant created by Vikash")
@@ -164,16 +197,12 @@ if __name__ == '__main__':
         elif "who is vikas" in query:
             say("He created me!")
 
-        elif "how are you " in query:
+        elif "how are you" in query:
             say("I am awesome  , what about you")
 
-        elif "stop" in query:
-            say("Goodbye, Sir")
-            break
+        elif "set volume to maximum" in query or "volume to maximum" in query:
+            set_volume_level("maximum")
 
-        elif "time" in query:
-            current_time = datetime.datetime.now().strftime("%I:%M %p")
-            say(f"Sir, the time is {current_time}")
 
         elif "increase volume" in query:
             set_volume(0.1)
@@ -190,8 +219,6 @@ if __name__ == '__main__':
         elif "set volume to zero" in query:
             set_volume_level("zero")
 
-        elif "set volume to maximum" in query:
-            set_volume_level("maximum")
 
         elif "set brightness to zero" in query:
             set_brightness_level("zero")
@@ -203,13 +230,30 @@ if __name__ == '__main__':
             search_query = query.replace("make a google search of ", "")
             google_search(search_query)
 
-        elif "make a google search on" in query:
-            search_query = query.replace("make a google search of ", "")
-            google_search(search_query)
+        elif "type" in query:
+            text_to_type = query.replace("type", "").strip()
+            type_text(text_to_type)
 
-        elif "unlock friday" in query:
-            say("Even dead I am the Hero  Unlocking Friday in 5 seconds.")
-            process_camera()
+        elif "time" in query:
+            current_time = datetime.datetime.now().strftime("%I:%M %p")
+            say(f"Sir, the time is {current_time}")
+
+        elif "stop" in query:
+            say("Goodbye, Sir")
+            break
+
+        elif "go to search" in query:
+            say("Going to search bar")
+            pyautogui.press('/')
+
+        elif "delete all" in query:
+            say("Deleting all text")
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.press('backspace')
+
+        elif "hello" in query:
+            say("Hello Sir")
+
 
         else:
             print("Command not recognized")
